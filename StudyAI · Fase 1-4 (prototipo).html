@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBFBFD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101218" media="(prefers-color-scheme: dark)">
+<meta name="description" content="">
+<title>StudyAI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#FBFBFD;--ink:#16181D;--muted:#5C6270;--card:#fff;--line:#E3E6EC;--accent:#2B50E6;--on:#fff;--soft:#EEF1FD;--err:#B3261E;
+box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101218;--ink:#EEF0F5;--muted:#A0A7B8;--card:#181B24;--line:#2A2F3C;--accent:#8EA4FF;--on:#101218;--soft:#1D2335;--err:#FF9A92}}
+:root[data-theme="dark"]{--bg:#101218;--ink:#EEF0F5;--muted:#A0A7B8;--card:#181B24;--line:#2A2F3C;--accent:#8EA4FF;--on:#101218;--soft:#1D2335;--err:#FF9A92}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 "Figtree",system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 max(1.25rem,env(safe-area-inset-left))}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--card);padding:.5rem 1rem;z-index:20}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.bar{display:flex;align-items:center;justify-content:space-between;min-height:3.75rem;gap:1rem}
+.logo{font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em}
+.logo b{color:var(--accent)}
+.nav{display:flex;align-items:center;gap:1.25rem}
+.nav a{text-decoration:none;font-weight:500}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:2px}
+.lang a{padding:.2rem .7rem;border-radius:999px;font-size:.9rem;min-height:32px;display:inline-flex;align-items:center}
+.lang a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+h1,h2,h3{margin:0;line-height:1.1;letter-spacing:-.03em;font-weight:700}
+h1{font-size:clamp(2.5rem,9vw,4.6rem)}
+h2{font-size:clamp(1.6rem,4.5vw,2.2rem);margin-bottom:1.25rem}
+.hero{padding:4rem 0 3rem}
+.hero p{font-size:1.2rem;color:var(--muted);max-width:34rem;margin:1.25rem 0 1.75rem}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.6rem 1.4rem;border-radius:12px;border:1.5px solid var(--accent);background:var(--accent);color:var(--on);font:600 1rem inherit;font-family:inherit;text-decoration:none;cursor:pointer;transition:transform .15s,opacity .2s}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.6;cursor:wait}
+.note{color:var(--muted);font-size:.95rem}
+.grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}@media (min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.4rem;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+a.tool{display:block;text-decoration:none;transition:transform .2s,border-color .2s}
+@media (hover:hover){a.tool:hover{transform:translateY(-3px);border-color:var(--accent)}}
+.ico{width:2.5rem;height:2.5rem;border-radius:10px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font-weight:700;margin-bottom:.9rem}
+a.tool h3{font-size:1.15rem;margin-bottom:.3rem}a.tool p{margin:0;color:var(--muted);font-size:.98rem}
+section{padding:2rem 0 3rem}
+.crumb{padding:1.5rem 0 .5rem;font-size:.95rem;color:var(--muted)}
+.tl{padding-bottom:1rem}.tl p{color:var(--muted);font-size:1.15rem;margin:.6rem 0 0}
+.banner{background:var(--soft);border-radius:12px;padding:.8rem 1rem;font-size:.95rem;margin:1.25rem 0}
+.form{display:grid;gap:1.1rem}
+label,legend{font-weight:600;display:block;margin-bottom:.35rem;padding:0}
+fieldset{border:0;margin:0;padding:0}
+input,textarea,select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem;-webkit-appearance:none;appearance:none}
+textarea{min-height:11rem;resize:vertical}
+.seg{display:flex;flex-wrap:wrap;gap:.5rem}
+.seg label{margin:0;font-weight:500}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:inline-flex;align-items:center;min-height:42px;padding:.4rem 1rem;border:1.5px solid var(--line);border-radius:999px;cursor:pointer}
+.seg input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
+.count{text-align:right;font-size:.9rem;color:var(--muted)}
+.state{margin-top:1.25rem;border-radius:14px;padding:1.1rem 1.25rem;border:1.5px solid var(--line)}
+.state.err{border-color:var(--err)}.state.err strong{color:var(--err)}
+.spin{display:inline-block;width:1rem;height:1rem;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:s .8s linear infinite;vertical-align:-2px;margin-right:.5rem}
+@keyframes s{to{transform:rotate(360deg)}}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+main>*{animation:in .4s ease both}
+footer{border-top:1px solid var(--line);padding:1.5rem 0;color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" id="skip"></a>
+<header><div class="wrap bar">
+  <a class="logo" id="logo" href="#/es/">Study<b>AI</b></a>
+  <nav class="nav" id="nav"></nav>
+</div></header>
+<main id="main" class="wrap" tabindex="-1"></main>
+<footer><div class="wrap" id="foot"></div></footer>
+
+<script>
+/* ===== i18n: diccionario central. Añadir un idioma = añadir su código a LANGS y un valor más en cada array. ===== */
+const LANGS=["es","ca"];
+const T={
+ skip:["Saltar al contenido","Salta al contingut"],
+ navTools:["Herramientas","Eines"],
+ slogan:["Estudia menos. Aprende mejor.","Estudia menys. Aprèn millor."],
+ heroP:["Herramientas de IA diseñadas para ayudarte a estudiar, practicar y entender cualquier tema.","Eines d’IA dissenyades per ajudar-te a estudiar, practicar i entendre qualsevol tema."],
+ start:["Empezar gratis","Començar gratis"],explore:["Explorar herramientas","Explorar eines"],
+ free:["Prueba las herramientas sin registrarte.","Prova les eines sense registrar-te."],
+ toolsH:["Herramientas","Eines"],home:["Inicio","Inici"],
+ banner:["La interfaz está lista, pero la IA aún no está conectada: falta enlazar el proveedor en el servidor.","La interfície és a punt, però la IA encara no està connectada: falta enllaçar el proveïdor al servidor."],
+ go:["Generar","Generar"],
+ words:["palabras","paraules"],
+ empty:["Escribe o pega algún texto para empezar.","Escriu o enganxa algun text per començar."],
+ loading:["Generando…","Generant…"],
+ errT:["IA no conectada","IA no connectada"],
+ errP:["Esta herramienta aún no puede generar resultados. Falta conectar el proveedor de IA en el servidor (endpoint /api/ai).","Aquesta eina encara no pot generar resultats. Falta connectar el proveïdor d’IA al servidor (endpoint /api/ai)."],
+ foot:["© 2026 StudyAI. Estudia menos. Aprende mejor.","© 2026 StudyAI. Estudia menys. Aprèn millor."],
+ metaHome:["StudyAI: herramientas de IA para estudiar, practicar y entender cualquier tema.","StudyAI: eines d’IA per estudiar, practicar i entendre qualsevol tema."],
+ metaTools:["Resumidor, preguntas de examen, flashcards, explicador, corrector de inglés y plan de estudio.","Resumidor, preguntes d’examen, flashcards, explicador, corrector d’anglès i pla d’estudi."],
+ notFound:["Página no encontrada","Pàgina no trobada"],
+ /* etiquetas de formulario */
+ notes:["Tus apuntes","Els teus apunts"],concept:["Concepto","Concepte"],subject:["Asignatura","Assignatura"],
+ date:["Fecha del examen","Data de l’examen"],topics:["Temas (uno por línea)","Temes (un per línia)"],hours:["Horas disponibles al día","Hores disponibles al dia"],
+ length:["Longitud","Llargada"],outlang:["Idioma del resultado","Idioma del resultat"],num:["Número","Nombre"],
+ diff:["Dificultad","Dificultat"],qtype:["Tipo de pregunta","Tipus de pregunta"],level:["Nivel","Nivell"],text:["Tu texto en inglés","El teu text en anglès"]
+};
+const O={ /* opciones */
+ short:["Breve","Breu"],normal:["Normal","Normal"],detailed:["Detallado","Detallat"],
+ es:["Castellano","Castellà"],ca:["Català","Català"],en:["English","English"],
+ easy:["Fácil","Fàcil"],mid:["Media","Mitjana"],hard:["Difícil","Difícil"],
+ mc:["Opción múltiple","Opció múltiple"],tf:["Verdadero/Falso","Vertader/Fals"],mixed:["Mixto","Mixt"],
+ adv:["Avanzado","Avançat"],kid:["Explícamelo como si tuviera 12 años","Explica’m-ho com si tingués 12 anys"]
+};
+const o=(v,l)=>O[v]?O[v][l]:v;
+const t=(k,l)=>T[k][l];
+
+/* ===== Rutas: un slug por idioma. Mismo componente, distinta URL. ===== */
+const SEG={tools:["herramientas","eines"]};
+const TOOLS=[
+ {id:"summarizer",slug:["resumidor","resumidor"],ic:"≡",name:["Resumidor AI","Resumidor AI"],tag:["Resume tus apuntes en segundos.","Resumeix els teus apunts en segons."],
+  meta:["Resumidor de apuntes con IA: textos breves, normales o detallados.","Resumidor d’apunts amb IA: textos breus, normals o detallats."],
+  f:[["text","notes"],["seg","length",["short","normal","detailed"]],["sel","outlang",["es","ca","en"]]]},
+ {id:"questions",slug:["generador-preguntas","generador-preguntes"],ic:"?",name:["Generador de preguntas","Generador de preguntes"],tag:["Convierte tus apuntes en preguntas de examen.","Converteix els teus apunts en preguntes d’examen."],
+  meta:["Genera preguntas de examen a partir de tus apuntes.","Genera preguntes d’examen a partir dels teus apunts."],
+  f:[["text","notes"],["sel","num",["5","10","15","20"]],["seg","diff",["easy","mid","hard"]],["seg","qtype",["mc","tf","mixed"]]]},
+ {id:"flashcards",slug:["flashcards","flashcards"],ic:"▭",name:["Flashcards","Flashcards"],tag:["Convierte tus apuntes en tarjetas para estudiar.","Converteix els teus apunts en targetes per estudiar."],
+  meta:["Crea flashcards desde tus apuntes para repasar.","Crea flashcards des dels teus apunts per repassar."],
+  f:[["text","notes"],["sel","num",["10","20","30"]]]},
+ {id:"explainer",slug:["explicador","explicador"],ic:"✦",name:["Explicador AI","Explicador AI"],tag:["Entiende cualquier concepto de forma sencilla.","Entén qualsevol concepte de manera senzilla."],
+  meta:["Explicaciones claras con ejemplos y preguntas de comprobación.","Explicacions clares amb exemples i preguntes de comprovació."],
+  f:[["line","concept"],["seg","level",["easy","normal","adv","kid"]]]},
+ {id:"english",slug:["corrector-ingles","corrector-angles"],ic:"Aa",name:["Corrector de inglés","Corrector d’anglès"],tag:["Mejora tus textos en inglés y aprende de tus errores.","Millora els teus textos en anglès i aprèn dels teus errors."],
+  meta:["Corrector de inglés por niveles A2, B1, B2 y C1.","Corrector d’anglès per nivells A2, B1, B2 i C1."],
+  f:[["text","text"],["seg","level",["A2","B1","B2","C1"]]]},
+ {id:"plan",slug:["plan-estudio","pla-estudi"],ic:"▦",name:["Planificador de estudio","Planificador d’estudi"],tag:["Crea un plan de estudio personalizado.","Crea un pla d’estudi personalitzat."],
+  meta:["Calendario de estudio según tu examen, temas y tiempo.","Calendari d’estudi segons el teu examen, temes i temps."],
+  f:[["line","subject"],["date","date"],["area","topics"],["num","hours"],["seg","diff",["easy","mid","hard"]]]}
+];
+
+/* ===== Capa de IA abstracta. Cambiar de proveedor = cambiar solo el servidor detrás de /api/ai. ===== */
+const ai={async run(tool,payload,lang){
+  throw new Error("NOT_CONNECTED"); // TODO: fetch("/api/ai/"+tool,{method:"POST",body:JSON.stringify({payload,lang})})
+}};
+
+/* ===== Router por hash: #/es/herramientas/resumidor ===== */
+const $=s=>document.querySelector(s);
+const path=(l,r,tool)=>"#/"+l+"/"+(r==="tools"?SEG.tools[LANGS.indexOf(l)]+(tool?"/"+tool.slug[LANGS.indexOf(l)]:""):"");
+function parse(){
+  const p=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);
+  let l=p[0];
+  if(!LANGS.includes(l)){l=(navigator.language||"es").toLowerCase().startsWith("ca")?"ca":"es";return{l,r:"home",redirect:true}}
+  const i=LANGS.indexOf(l);
+  if(!p[1])return{l,r:"home"};
+  if(p[1]===SEG.tools[i]){
+    if(!p[2])return{l,r:"tools"};
+    const tool=TOOLS.find(x=>x.slug[i]===p[2]);
+    return tool?{l,r:"tool",tool}:{l,r:"404"};
+  }
+  return{l,r:"404"};
+}
+const Navbar=(l,cur)=>`<a href="${path(l,"tools")}">${t("navTools",l=== "es"?0:1)}</a>
+ <div class="lang" role="group" aria-label="Idioma / Llengua">${LANGS.map(x=>`<a href="${cur(x)}" hreflang="${x}" lang="${x}" ${x===l?'aria-current="true"':""}>${x.toUpperCase()}</a>`).join("")}</div>`;
+
+const ToolCard=(l,i,tool)=>`<a class="card tool" href="${path(l,"tool",tool)}"><div class="ico" aria-hidden="true">${tool.ic}</div><h3>${tool.name[i]}</h3><p>${tool.tag[i]}</p></a>`;
+
+function Field(f,i,tool){
+  const [kind,key,opts]=f,lab=t(key,i),id="f-"+key;
+  if(kind==="text")return`<div><label for="${id}">${lab}</label><textarea id="${id}" name="${key}" data-main></textarea><div class="count" aria-live="polite"><span id="wc">0</span> ${t("words",i)}</div></div>`;
+  if(kind==="area")return`<div><label for="${id}">${lab}</label><textarea id="${id}" name="${key}" style="min-height:6rem"></textarea></div>`;
+  if(kind==="line")return`<div><label for="${id}">${lab}</label><input id="${id}" name="${key}" ${tool.id==="explainer"?"data-main":""}></div>`;
+  if(kind==="date")return`<div><label for="${id}">${lab}</label><input id="${id}" name="${key}" type="date"></div>`;
+  if(kind==="num")return`<div><label for="${id}">${lab}</label><input id="${id}" name="${key}" type="number" inputmode="numeric" min="1" max="12" value="2"></div>`;
+  if(kind==="sel")return`<div><label for="${id}">${lab}</label><select id="${id}" name="${key}">${opts.map(v=>`<option value="${v}">${o(v,i)}</option>`).join("")}</select></div>`;
+  return`<fieldset><legend>${lab}</legend><div class="seg">${opts.map((v,n)=>`<label><input type="radio" name="${key}" value="${v}" ${n?"":"checked"}><span>${o(v,i)}</span></label>`).join("")}</div></fieldset>`;
+}
+const ToolLayout=(l,i,tool)=>`<div class="crumb"><a href="${path(l,"home")}">${t("home",i)}</a> / <a href="${path(l,"tools")}">${t("toolsH",i)}</a></div>
+<div class="tl"><h1 style="font-size:clamp(2rem,7vw,3.2rem)">${tool.name[i]}</h1><p>${tool.tag[i]}</p></div>
+<p class="banner" role="note">${t("banner",i)}</p>
+<form class="form card" id="tf" novalidate>${tool.f.map(f=>Field(f,i,tool)).join("")}<div class="row"><button class="btn" type="submit" id="go">${t("go",i)}</button></div></form>
+<div id="out" role="status" aria-live="polite"></div>`;
+
+function mountTool(l,i,tool){
+  const form=$("#tf"),out=$("#out"),main=form.querySelector("[data-main]"),wc=$("#wc");
+  if(wc)main.addEventListener("input",()=>{const n=main.value.trim().split(/\s+/).filter(Boolean).length;wc.textContent=n});
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const err=m=>out.innerHTML=`<div class="state err"><strong>${m[0]}</strong>${m[1]?`<p style="margin:.3rem 0 0">${m[1]}</p>`:""}</div>`;
+    if(!main.value.trim())return err([t("empty",i)]);
+    const b=$("#go");b.disabled=true;out.innerHTML=`<div class="state"><span class="spin"></span>${t("loading",i)}</div>`;
+    try{await ai.run(tool.id,Object.fromEntries(new FormData(form)),l)}
+    catch(x){err([t("errT",i),t("errP",i)])}
+    b.disabled=false;
+  });
+}
+
+/* SEO en cliente: title, description, canonical, hreflang, og. (En producción esto se genera en servidor.) */
+function seo(l,i,title,desc,eq){
+  document.documentElement.lang=l;document.title=title;
+  const set=(sel,mk,attrs)=>{let e=document.head.querySelector(sel);if(!e){e=document.createElement(mk);document.head.append(e)}Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v))};
+  set('meta[name=description]',"meta",{name:"description",content:desc});
+  set('meta[property="og:title"]',"meta",{property:"og:title",content:title});
+  set('meta[property="og:description"]',"meta",{property:"og:description",content:desc});
+  set('link[rel=canonical]',"link",{rel:"canonical",href:eq(l)});
+  document.head.querySelectorAll("link[rel=alternate]").forEach(e=>e.remove());
+  LANGS.forEach(x=>set('link[hreflang="'+x+'"]',"link",{rel:"alternate",hreflang:x,href:eq(x)}));
+}
+
+function render(){
+  const r=parse();
+  if(r.redirect){location.replace(path(r.l,"home"));return}
+  const l=r.l,i=LANGS.indexOf(l),tool=r.tool;
+  const eq=x=>path(x,r.r==="404"?"home":r.r,tool);
+  $("#skip").textContent=t("skip",i);$("#logo").href=path(l,"home");
+  $("#nav").innerHTML=Navbar(l,eq);$("#foot").textContent=t("foot",i);
+  const m=$("#main");let html="";
+  if(r.r==="home"){
+    html=`<section class="hero"><h1>${t("slogan",i)}</h1><p>${t("heroP",i)}</p>
+     <div class="row"><a class="btn" href="${path(l,"tool",TOOLS[0])}">${t("start",i)}</a><a class="btn ghost" href="${path(l,"tools")}">${t("explore",i)}</a></div>
+     <p class="note" style="margin-top:1rem">${t("free",i)}</p></section>
+     <section><h2>${t("toolsH",i)}</h2><div class="grid">${TOOLS.map(x=>ToolCard(l,i,x)).join("")}</div></section>`;
+    seo(l,i,"StudyAI · "+t("slogan",i),t("metaHome",i),eq);
+  }else if(r.r==="tools"){
+    html=`<section><h1 style="font-size:clamp(2rem,7vw,3.2rem);margin-bottom:1.5rem">${t("toolsH",i)}</h1><div class="grid">${TOOLS.map(x=>ToolCard(l,i,x)).join("")}</div></section>`;
+    seo(l,i,t("toolsH",i)+" · StudyAI",t("metaTools",i),eq);
+  }else if(r.r==="tool"){
+    html=`<section>${ToolLayout(l,i,tool)}</section>`;
+    seo(l,i,tool.name[i]+" · StudyAI",tool.meta[i],eq);
+  }else{
+    html=`<section class="hero"><h1>404</h1><p>${t("notFound",i)}</p><a class="btn" href="${path(l,"home")}">${t("home",i)}</a></section>`;
+    seo(l,i,t("notFound",i)+" · StudyAI",t("metaHome",i),eq);
+  }
+  m.innerHTML=html;if(r.r==="tool")mountTool(l,i,tool);
+  if(!render.first)m.focus({preventScroll:true});render.first=false;scrollTo(0,0);
+}
+render.first=true;
+addEventListener("hashchange",render);render();
+</script>
+</body>
+</html>
